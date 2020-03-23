@@ -27,18 +27,7 @@ import org.openstreetmap.josm.gui.preferences.PreferenceSetting;
 import org.openstreetmap.josm.plugins.Plugin;
 import org.openstreetmap.josm.plugins.PluginInformation;
 import org.openstreetmap.josm.plugins.customizepublictransportstop.CustomizeStopAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.AddStopPositionAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.CreatePlatformNodeAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.CreatePlatformNodeThroughReplaceAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.CreatePlatformShortcutAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.DoubleSplitAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.EdgeSelectionAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.ExtractPlatformNodeAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.PTWizardAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.RoutingAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.SortPTRouteMembersAction;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.SortPTRouteMembersMenuBar;
-import org.openstreetmap.josm.plugins.pt_assistant.actions.SplitRoundaboutAction;
+import org.openstreetmap.josm.plugins.pt_assistant.actions.*;
 import org.openstreetmap.josm.plugins.pt_assistant.data.PTRouteSegment;
 import org.openstreetmap.josm.plugins.pt_assistant.gui.PTAssistantLayerManager;
 import org.openstreetmap.josm.plugins.pt_assistant.validation.BicycleFootRouteValidatorTest;
@@ -194,7 +183,15 @@ public class PTAssistantPlugin extends Plugin {
                 return Arrays.asList(new SortPTRouteMembersAction(editorAccess));
             }
         };
+        IRelationEditorActionGroup group3 = new IRelationEditorActionGroup() {
+            @Override
+            public List<AbstractRelationEditorAction> getActions(IRelationEditorActionAccess editorAccess) {
+                return Arrays.asList(new AddNearestWayAction(editorAccess));
+            }
+        };
         RelationEditorHooks.addActionsToMembers(group1);
         RelationEditorHooks.addActionsToMembers(group2);
+        RelationEditorHooks.addActionsToMembers(group3);
+
     }
 }
